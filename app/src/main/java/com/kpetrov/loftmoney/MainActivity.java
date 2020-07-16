@@ -8,7 +8,6 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    //just comment for new branch (Git)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
