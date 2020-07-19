@@ -3,5 +3,4 @@
     <string name="edittext_name_hint">Title</string>
     <string name="edittext_price_hint">Price</string>
     <string name="add_button_title">Add</string>
-    <string name="text_hello_world">Hello World</string>
 </resources>
