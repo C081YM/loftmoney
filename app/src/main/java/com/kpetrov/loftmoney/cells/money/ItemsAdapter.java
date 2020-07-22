@@ -23,14 +23,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         this.itemsAdapterClick = itemsAdapterClick;
     }
 
-    public void setData(List<Item> moneyCellModels) {
+    public void setData(List<Item> items) {
         this.items.clear();
-        this.items.addAll(moneyCellModels);
+        this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void addData(List<Item> moneyCellModels) {
-        this.items.addAll(moneyCellModels);
+    public void addData(List<Item> items) {
+        this.items.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -52,7 +52,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
 
     static class MoneyViewHolder extends RecyclerView.ViewHolder {
         TextView nameView;
-        TextView priceView;
+        TextView valueView;
         ItemsAdapterClick itemsAdapterClick;
 
         public MoneyViewHolder(ItemsAdapterClick itemsAdapterClick, @NonNull View itemView) {
@@ -60,11 +60,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
             this.itemsAdapterClick = itemsAdapterClick;
 
             nameView = itemView.findViewById(R.id.itemNameView);
-            priceView = itemView.findViewById(R.id.itemPriceView);
+            valueView = itemView.findViewById(R.id.itemValueView);
         }
 
         public void bind(final Item item) {
-            nameView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (itemsAdapterClick != null) {
@@ -73,18 +73,18 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
                 }
             });
 
-            priceView.setOnClickListener(new View.OnClickListener() {
+            valueView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (itemsAdapterClick != null) {
-                        itemsAdapterClick.onValueClick(item.getPrice());
+                        itemsAdapterClick.onValueClick(item.getValue());
                     }
                 }
             });
 
             nameView.setText(item.getName());
-            priceView.setText(item.getPrice());
-            priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));
+            valueView.setText(item.getValue());
+            valueView.setTextColor(ContextCompat.getColor(valueView.getContext(), item.getColor()));
         }
     }
 }

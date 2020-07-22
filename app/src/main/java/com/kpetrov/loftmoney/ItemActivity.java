@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
 import com.kpetrov.loftmoney.cells.money.ItemsAdapter;
 import com.kpetrov.loftmoney.cells.money.ItemsAdapterClick;
 import com.kpetrov.loftmoney.cells.money.Item;
@@ -28,7 +27,7 @@ public class ItemActivity extends AppCompatActivity {
         adapter = new ItemsAdapter();
         adapter.setItemsAdapterClick(new ItemsAdapterClick() {
             @Override
-            public void onMoneyClick(Item moneyCellModel) {
+            public void onMoneyClick(Item item) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                 startActivity(intent);
             }
@@ -47,26 +46,25 @@ public class ItemActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         adapter.setData(generateExpenses());
+        adapter.setData(generateIncomes());
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                adapter.addData(generateExpenses());
                 adapter.addData(generateIncomes());
-                adapter.addData(generateIncomes());
-                adapter.addData(generateIncomes());
-                adapter.addData(generateIncomes());
+
             }
         }, 3000);
 
-
-
     }
+
 
     private List<Item> generateExpenses() {
         List<Item> items = new ArrayList<>();
         items.add(new Item("Молоко", "70 ₽", R.color.colorItemPrice));
         items.add(new Item("Зубная щётка", "70 ₽", R.color.colorItemPrice));
-        items.add(new Item("Сковородка с антипригарным покрытием","1670 ₽", R.color.colorItemPrice));
+        items.add(new Item("Сковородка с антипригарным покрытием", "1670 ₽", R.color.colorItemPrice));
 
         return items;
     }
@@ -75,11 +73,11 @@ public class ItemActivity extends AppCompatActivity {
         List<Item> items = new ArrayList<>();
         items.add(new Item("Зарплата.Июнь", "70000 ₽", R.color.colorItemIncome));
         items.add(new Item("Премия", "7000 ₽", R.color.colorItemIncome));
-        items.add(new Item("Олег наконец-то вернул долг",
-                "300000 ₽", R.color.colorItemIncome));
+        items.add(new Item("Олег наконец-то вернул долг", "300000 ₽", R.color.colorItemIncome));
 
         return items;
     }
+
 }
 
 

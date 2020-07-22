@@ -2,12 +2,12 @@ package com.kpetrov.loftmoney.cells.money;
 
 public class Item {
     private String name;
-    private String price;
+    private String value;
     private Integer color;
 
-    public Item(String name, String price, Integer color) {
+    public Item(String name, String value, Integer color) {
         this.name = name;
-        this.price = price;
+        this.value = value;
         this.color = color;
     }
 
@@ -15,8 +15,8 @@ public class Item {
         return name;
     }
 
-    public String getPrice() {
-        return price;
+    public String getValue() {
+        return value;
     }
 
     public Integer getColor() {
