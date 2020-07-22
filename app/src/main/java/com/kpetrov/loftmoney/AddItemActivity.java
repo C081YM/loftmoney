@@ -1,17 +1,15 @@
 package com.kpetrov.loftmoney;
 
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputEditText;
+
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -43,7 +41,6 @@ public class AddItemActivity extends AppCompatActivity {
                 Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_disable);
                 buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
             }
-
         }
     };
 
@@ -60,15 +57,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
-
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast toast = Toast.makeText(getApplicationContext(), "есть возможность нажать кнопку", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-
     }
+
 }
+

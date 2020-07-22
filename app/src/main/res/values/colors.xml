@@ -3,7 +3,12 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="addItemActivity_editText_colorHint">#3574FA</color>
+    <color name="addItemActivity_editText_color">#3574FA</color>
+    <color name="addItemActivity_editText_colorHint">#dbdbdb</color>
     <color name="addItemActivity_buttonAdd_colorEnable">#7ED321</color>
     <color name="addItemActivity_buttonAdd_colorDisable">#EAEAEA</color>
+    <color name="itemNameView">#666664</color>
+    <color name="colorItemIncome">#7ed321</color>
+    <color name="colorItemPrice">#4a90e2</color>
+    <color name="borders">#efefef</color>
 </resources>
