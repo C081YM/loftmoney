@@ -1,14 +1,16 @@
 package com.kpetrov.loftmoney;
 
-
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
+
 
 
 public class AddItemActivity extends AppCompatActivity {
@@ -16,15 +18,14 @@ public class AddItemActivity extends AppCompatActivity {
     private TextInputEditText etPrice;
     private TextInputEditText etTitle;
     private Button buttonAdd;
+
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
         }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
         }
 
         @Override
@@ -44,8 +45,6 @@ public class AddItemActivity extends AppCompatActivity {
         }
     };
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +54,22 @@ public class AddItemActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.editTextTitle);
         buttonAdd = findViewById(R.id.add_button);
 
+
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = etTitle.getText().toString();
+                String price = etPrice.getText().toString();
+
+                if (etPrice.getText() != null && etPrice.getText().toString().trim().length() > 0 && etTitle.getText() != null && etTitle.getText().toString().trim().length() > 0) {
+                    setResult(RESULT_OK);
+                    new Intent().putExtra("name",name).putExtra("price",price);
+                    finish();
+                }
+            }
+        });
     }
-
 }
-
