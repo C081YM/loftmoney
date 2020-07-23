@@ -4,19 +4,19 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
-
-
+import java.util.Objects;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    private TextInputEditText etPrice;
     private TextInputEditText etTitle;
+    private TextInputEditText etPrice;
     private Button buttonAdd;
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -60,13 +60,14 @@ public class AddItemActivity extends AppCompatActivity {
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String name = etTitle.getText().toString();
-                String price = etPrice.getText().toString();
+            public void onClick(final View v) {
+                String name = Objects.requireNonNull(etTitle.getText()).toString();
+                String price = Objects.requireNonNull(etPrice.getText()).toString();
 
-                if (etPrice.getText() != null && etPrice.getText().toString().trim().length() > 0 && etTitle.getText() != null && etTitle.getText().toString().trim().length() > 0) {
-                    setResult(RESULT_OK);
-                    new Intent().putExtra("name",name).putExtra("price",price);
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(price)) {
+                    setResult(
+                            RESULT_OK,
+                            new Intent().putExtra("name", name).putExtra("price", price));
                     finish();
                 }
             }

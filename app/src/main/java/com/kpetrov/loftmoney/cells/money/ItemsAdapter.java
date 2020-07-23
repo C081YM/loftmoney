@@ -13,19 +13,18 @@ import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHolder> {
 
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<Item>();
 
-    public void setData(List<Item> items) {
-       this.items.clear();
-      this.items.addAll(items);
-        notifyDataSetChanged();
+    public void setData(Item item) {
+       items.clear();
+       items.add(item);
+       notifyDataSetChanged();
     }
 
-    public void addData(List<Item> items) {
-        this.items.addAll(items);
+    public void addData(Item item) {
+        items.add(item);
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
@@ -35,7 +34,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MoneyViewHolder holder, int position) {
-        holder.bind(items.get(position));
+        holder.bindItem(items.get(position));
     }
 
     @Override
@@ -44,8 +43,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
     }
 
     static class MoneyViewHolder extends RecyclerView.ViewHolder {
-        TextView nameView;
-        TextView priceView;
+        private TextView nameView;
+        private TextView priceView;
 
         public MoneyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,7 +53,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
             priceView = itemView.findViewById(R.id.itemPriceView);
         }
 
-        public void bind(final Item item) {
+        public void bindItem(final Item item) {
 
             nameView.setText(item.getName());
             priceView.setText(item.getPrice());
