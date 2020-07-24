@@ -1,4 +1,4 @@
-package com.kpetrov.loftmoney.cells.money;
+package com.kpetrov.loftmoney;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,13 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import com.kpetrov.loftmoney.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHolder> {
 
-    private List<Item> items = new ArrayList<Item>();
+    private List<Item> items = new ArrayList<>();
 
     public void setData(Item item) {
        items.clear();

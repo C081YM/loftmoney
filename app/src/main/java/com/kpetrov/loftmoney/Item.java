@@ -1,4 +1,4 @@
-package com.kpetrov.loftmoney.cells.money;
+package com.kpetrov.loftmoney;
 
 public class Item {
     private String name;

@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import com.kpetrov.loftmoney.cells.money.ItemsAdapter;
-import com.kpetrov.loftmoney.cells.money.Item;
 
 public class MainActivity extends AppCompatActivity {
 
