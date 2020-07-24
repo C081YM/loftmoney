@@ -5,5 +5,8 @@
     <string name="add_button_title">Add</string>
     <string name="add">Add</string>
     <string name="plusAddButton">+</string>
+    <string name="expenses">Expenses</string>
+    <string name="income">Income</string>
+    <string name="balance">Balance</string>
 
 </resources>

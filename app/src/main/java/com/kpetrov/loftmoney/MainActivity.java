@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class MainActivity extends AppCompatActivity {
 
         @Override
@@ -14,6 +16,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container, new BudgetFragment());
         transaction.commit();
+
+            TabLayout tabLayout = findViewById(R.id.tabs);
+            tabLayout.addTab(tabLayout.newTab().setText(R.string.expenses));
+            tabLayout.addTab(tabLayout.newTab().setText(R.string.income));
+            tabLayout.addTab(tabLayout.newTab().setText(R.string.balance));
 
     }
 }

@@ -12,4 +12,6 @@
     <color name="colorItemPrice">#4a90e2</color>
     <color name="borders">#efefef</color>
     <color name="plusInPlusButton">#ffffff</color>
+    <color name="colorTabs">#3574fa</color>
+    <color name="colorTextTabs">#ffffff</color>
 </resources>
