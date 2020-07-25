@@ -14,15 +14,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class BudgetFragment extends Fragment {
 
     public static final int REQUEST_CODE = 20;
     public static final String COLOR_CHOICE = "colorChoice";
     private ItemsAdapter adapter;
-
-
 
     public static BudgetFragment newInstance (final int colorChoice) {
         BudgetFragment budgetFragment = new BudgetFragment();

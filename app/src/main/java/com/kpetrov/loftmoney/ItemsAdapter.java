@@ -1,7 +1,6 @@
 package com.kpetrov.loftmoney;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,12 +18,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
     public ItemsAdapter(int colorChoice) {
         this.colorChoice = colorChoice;
     }
-
-    /*public void setData(Item item) {
-       items.clear();
-       items.add(item);
-       notifyDataSetChanged();
-    }*/
 
     public void addData(Item item) {
         items.add(item);
@@ -66,7 +59,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
 
             nameView.setText(item.getName());
             priceView.setText(priceView.getContext().getResources().getString(R.string.currency,String.valueOf(item.getPrice())));
-
         }
     }
 }

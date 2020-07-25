@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
