@@ -14,12 +14,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
 
     private List<Item> items = new ArrayList<>();
 
-    public void setData(Item item) {
-       items.clear();
-       items.add(item);
-       notifyDataSetChanged();
-    }
-
     public void addData(Item item) {
         items.add(item);
         notifyDataSetChanged();
@@ -55,7 +49,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         public void bindItem(final Item item) {
 
             nameView.setText(item.getName());
-            priceView.setText(item.getPrice());
+            priceView.setText(priceView.getContext().getResources().getString(R.string.currency,String.valueOf(item.getPrice())));
             priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));
         }
     }
