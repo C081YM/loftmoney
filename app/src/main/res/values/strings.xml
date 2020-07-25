@@ -9,5 +9,6 @@
     <string name="income">Income</string>
     <string name="balance">Balance</string>
     <string name="budget_accounting">Budget accounting</string>
+    <string name="currency">%s ₽</string>
 
 </resources>

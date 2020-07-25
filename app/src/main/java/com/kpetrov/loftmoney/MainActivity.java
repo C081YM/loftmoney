@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -37,7 +36,14 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return new BudgetFragment();
+            switch (position) {
+                case 0:
+                    return BudgetFragment.newInstance(R.color.colorItemPrice);
+                case 1:
+                    return BudgetFragment.newInstance(R.color.colorItemIncome);
+                default:
+                    return null;
+            }
         }
 
         @Override
@@ -45,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             return 2;
         }
     }
-
 }
 
 

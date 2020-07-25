@@ -2,13 +2,13 @@ package com.kpetrov.loftmoney;
 
 public class Item {
     private String name;
-    private String price;
-    private Integer color;
+    private int price;
+    //private Integer color;
 
-    public Item(String name, String price, Integer color) {
+    public Item(String name, int price) {
         this.name = name;
         this.price = price;
-        this.color = color;
+        //this.color = color;
     }
 
     public String getName() {
@@ -19,16 +19,16 @@ public class Item {
         this.name = name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Integer getColor() {
-    return color;
-   }
+    //public Integer getColor() {
+   //return color;
+   //
 
 }

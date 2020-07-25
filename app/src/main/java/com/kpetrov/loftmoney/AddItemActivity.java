@@ -11,7 +11,6 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
-import java.util.Objects;
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -61,8 +60,8 @@ public class AddItemActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                String name = Objects.requireNonNull(etTitle.getText()).toString();
-                String price = Objects.requireNonNull(etPrice.getText()).toString();
+                String name = etTitle.getText().toString();
+                String price = etPrice.getText().toString();
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(price)) {
                     setResult(
