@@ -8,5 +8,7 @@
     <string name="expenses">Расходы</string>
     <string name="income">Доходы</string>
     <string name="balance">Баланс</string>
+    <string name="budget_accounting">Учет бюджета</string>
+
 
 </resources>

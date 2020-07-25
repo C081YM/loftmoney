@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class BudgetFragment extends Fragment {
 
-    public static final int REQUEST_CODE = 100;
+    public static final int REQUEST_CODE = 20;
     private ItemsAdapter adapter;
 
     @Nullable

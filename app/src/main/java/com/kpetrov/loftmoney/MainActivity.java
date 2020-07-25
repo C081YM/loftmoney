@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.income);
-        tabLayout.getTabAt(2).setText(R.string.balance);
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
     }
 
