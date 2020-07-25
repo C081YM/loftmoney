@@ -5,18 +5,35 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorTabs"
-        app:tabTextColor="@color/colorTextTabs"/>
-    
+        android:text="@string/budget_accounting"
+        android:paddingLeft="25dp"
+        android:paddingBottom="11dp"
+        android:paddingTop="17dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextTabs"
+        android:background="@color/colorTabs" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" >
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTabs"
+            app:tabIndicatorColor="@color/colorUnselectedTabs"
+            app:tabSelectedTextColor="@color/colorTextTabs" />
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
+
+
+

@@ -6,14 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
-
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -26,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.income);
-        tabLayout.getTabAt(2).setText(R.string.balance);
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {
@@ -38,15 +35,21 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return new BudgetFragment();
+            switch (position) {
+                case 0:
+                    return new BudgetFragment();
+                case 1:
+                    return new IncomeFragment();
+                default:
+                return null;
+            }
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
     }
-
 }
 
 

@@ -8,5 +8,6 @@
     <string name="expenses">Expenses</string>
     <string name="income">Income</string>
     <string name="balance">Balance</string>
+    <string name="budget_accounting">Budget accounting</string>
 
 </resources>

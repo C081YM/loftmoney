@@ -14,4 +14,6 @@
     <color name="plusInPlusButton">#ffffff</color>
     <color name="colorTabs">#3574fa</color>
     <color name="colorTextTabs">#ffffff</color>
+    <color name="colorUnselectedTabs">#b38baaef</color>
+    <color name="colorBudgetAccountingText">#ffffff</color>
 </resources>

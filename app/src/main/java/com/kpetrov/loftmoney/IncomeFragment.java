@@ -15,15 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.Objects;
 
-public class BudgetFragment extends Fragment {
+public class IncomeFragment extends Fragment {
 
-    public static final int REQUEST_CODE = 50;
+    public static final int REQUEST_CODE = 20;
     public ItemsAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_budget,container,false);
+        View view = inflater.inflate(R.layout.fragment_income,container,false);
 
         Button plusButton = view.findViewById(R.id.plusButton);
         plusButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +49,7 @@ public class BudgetFragment extends Fragment {
     public void onActivityResult(final int requestCode, final int resultCode,@Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            adapter.addData(new Item((data).getStringExtra("name"), data.getStringExtra("price"), R.color.colorItemPrice));
+            adapter.addData(new Item((data).getStringExtra("name"), data.getStringExtra("price"), R.color.colorItemIncome));
         }
     }
 }
