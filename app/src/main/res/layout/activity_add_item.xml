@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="102dp"
-        android:textColorHint="@color/addItemActivity_editText_colorHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,7 +22,6 @@
         android:hint="@string/edittext_name_hint"
         android:inputType="text"
         android:textColor="@color/addItemActivity_editText_color"
-        android:textColorHint="@color/addItemActivity_editText_colorHint"
         android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -33,7 +31,6 @@
         android:id="@+id/tilPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/addItemActivity_editText_colorHint"
         app:layout_constraintTop_toBottomOf="@id/tilTitle">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,10 +45,8 @@
         android:inputType="number"
         android:textSize="24sp"
         android:textColor="@color/addItemActivity_editText_color"
-        android:textColorHint="@color/addItemActivity_editText_colorHint"
         app:layout_constraintTop_toBottomOf="@id/editTextTitle"/>
 </com.google.android.material.textfield.TextInputLayout>
-
 
     <Button
         android:id="@+id/add_button"
@@ -61,7 +56,7 @@
         android:drawableStart="@drawable/ic_arrow_disable"
         android:enabled="false"
         android:text="@string/add_button_title"
-        android:textColor="@color/addItemActivity_buttonAdd_colorDisable"
+        android:textColor="@color/button_add_and_check_mark_color_selector"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

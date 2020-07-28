@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.util.Objects;
 
 public class BudgetFragment extends Fragment {
@@ -20,6 +22,8 @@ public class BudgetFragment extends Fragment {
     public static final int REQUEST_CODE = 20;
     public static final String COLOR_CHOICE = "colorChoice";
     private ItemsAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     public static BudgetFragment newInstance (final int colorChoice) {
         BudgetFragment budgetFragment = new BudgetFragment();
@@ -34,14 +38,6 @@ public class BudgetFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_budget,null);
 
-        Button plusButton = view.findViewById(R.id.plusButton);
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-            startActivityForResult(new Intent(getActivity(), AddItemActivity.class), REQUEST_CODE);
-            }
-        });
-
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL);
@@ -50,6 +46,14 @@ public class BudgetFragment extends Fragment {
 
         adapter = new ItemsAdapter(getArguments().getInt(COLOR_CHOICE));
         recyclerView.setAdapter(adapter);
+
+        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               loadItems();
+
+            }
+        });*/
 
         return view;
     }

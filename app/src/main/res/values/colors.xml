@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#3574fa</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#ffc107</color>
     <color name="addItemActivity_editText_color">#3574FA</color>
     <color name="addItemActivity_editText_colorHint">#dbdbdb</color>
-    <color name="addItemActivity_buttonAdd_colorEnable">#7ED321</color>
-    <color name="addItemActivity_buttonAdd_colorDisable">#EAEAEA</color>
+    <color name="addItemActivity_buttonAdd_and_check_mark_colorEnable">#7ED321</color>
+    <color name="addItemActivity_buttonAdd_and_check_mark_colorDisable">#EAEAEA</color>
     <color name="itemNameView">#666664</color>
     <color name="colorItemIncome">#7ed321</color>
     <color name="colorItemPrice">#4a90e2</color>
     <color name="borders">#efefef</color>
-    <color name="plusInPlusButton">#ffffff</color>
     <color name="colorTabs">#3574fa</color>
     <color name="colorTextTabs">#ffffff</color>
     <color name="colorUnselectedTabs">#b38baaef</color>

@@ -32,12 +32,10 @@ public class AddItemActivity extends AppCompatActivity {
 
             if (etPrice.getText() != null && etPrice.getText().toString().trim().length() > 0 && etTitle.getText() != null && etTitle.getText().toString().trim().length() > 0){
                 buttonAdd.setEnabled(true);
-                buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.addItemActivity_buttonAdd_colorEnable));
                 Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_enable);
                 buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
             } else {
                 buttonAdd.setEnabled(false);
-                buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.addItemActivity_buttonAdd_colorDisable));
                 Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_disable);
                 buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
             }
