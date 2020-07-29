@@ -11,61 +11,73 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static final int REQUEST_CODE = 100;
     RecyclerView recyclerView;
-    private ItemsAdapter adapter;
+    ItemsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button plusButton = findViewById(R.id.plusButton);
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                startActivityForResult(new Intent(MainActivity.this, AddItemActivity.class), REQUEST_CODE);
-            }
-        });
+        recyclerView = findViewById(R.id.recycler);
+        adapter = new ItemsAdapter();
 
-       recyclerView = findViewById(R.id.recycler);
-       adapter = new ItemsAdapter();
-
-       recyclerView.setAdapter(adapter);
-       recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-
-       new Handler().postDelayed(new Runnable() {
-       @Override
-           public void run() {
-               adapter.addData(new Item("Milk","50", R.color.colorItemPrice));
-               adapter.addData(new Item("Income","120", R.color.colorItemIncome));
-           }
-       }, 2000);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);      //divider
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));                             //divider
         recyclerView.addItemDecoration(dividerItemDecoration);                                                                      //divider
 
+        adapter.setData(generateExpenses());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter.addData(generateIncomes());
+            }
+        }, 3000);
+
     }
 
-    private void generateExpenses() {
-       adapter.addData(new Item("Комод", "5000", R.color.colorItemPrice));
+    private List<Item> generateExpenses() {
+        List<Item> items = new ArrayList<>();
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+        items.add(new Item("Milk","49", R.color.colorItemPrice));
+
+        return items;
     }
 
-    private void generateIncomes() {
-        adapter.addData(new Item("Проценты по вкладу", "10000", R.color.colorItemIncome));
+    private List<Item> generateIncomes() {
+        List<Item> items = new ArrayList<>();
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+        items.add(new Item("ZP","15000", R.color.colorItemIncome));
+
+        return items;
     }
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode,@Nullable final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            adapter.addData(new Item(data.getStringExtra("name"), data.getStringExtra("price"), R.color.colorItemPrice));
 
-        }
-    }
 }
 
 

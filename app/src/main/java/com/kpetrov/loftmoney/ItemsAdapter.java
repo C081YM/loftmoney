@@ -13,16 +13,16 @@ import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHolder> {
 
-    private List<Item> items = new ArrayList<>();
+    List<Item> items = new ArrayList<>();
 
-    public void setData(Item item) {
-       items.clear();
-       items.add(item);
-       notifyDataSetChanged();
+    public void setData(List<Item> items) {
+        this.items.clear();
+        this.items.addAll(items);
+        notifyDataSetChanged();
     }
 
-    public void addData(Item item) {
-        items.add(item);
+    public void addData(List<Item> items) {
+        this.items.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -34,7 +34,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MoneyViewHolder holder, int position) {
-        holder.bindItem(items.get(position));
+        holder.bind(items.get(position));
     }
 
     @Override
@@ -43,8 +43,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
     }
 
     static class MoneyViewHolder extends RecyclerView.ViewHolder {
-        private TextView nameView;
-        private TextView priceView;
+        TextView nameView;
+        TextView priceView;
 
         public MoneyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,11 +53,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
             priceView = itemView.findViewById(R.id.itemPriceView);
         }
 
-        public void bindItem(final Item item) {
+        public void bind(Item item) {
 
             nameView.setText(item.getName());
             priceView.setText(item.getPrice());
-            priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));
+            priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));     //передать контекст, контекст есть у любого визуального элемента
         }
     }
 }
