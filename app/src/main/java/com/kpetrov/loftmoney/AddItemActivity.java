@@ -55,7 +55,7 @@ public class AddItemActivity extends AppCompatActivity {
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        /*buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 String name = etTitle.getText().toString();
@@ -68,6 +68,6 @@ public class AddItemActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        });
+        });*/
     }
 }

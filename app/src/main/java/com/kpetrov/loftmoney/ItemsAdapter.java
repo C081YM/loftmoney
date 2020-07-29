@@ -1,6 +1,7 @@
 package com.kpetrov.loftmoney;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,28 +13,48 @@ import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHolder> {
 
-    private List<Item> items = new ArrayList<>();
-    private final int colorChoice;
+    List<Item> items = new ArrayList<>();
+    View.OnClickListener onClickListener;
+
+    /*private final int colorChoice;
 
     public ItemsAdapter(int colorChoice) {
         this.colorChoice = colorChoice;
+    }*/
+
+    public void addData(List<Item> items) {
+        this.items.addAll(items);
     }
 
-    public void addData(Item item) {
-        items.add(item);
+    /*public void addData(List<Item> items) {   //
+        this.items.addAll(items);             //
+        notifyDataSetChanged();               //
+    }*/
+
+    /*public List<Item> getData() {             //
+        return items;                         //
+    }     */                                    //
+
+    public void setData(List<Item> items ) {
+        this.items.clear();
+        this.items.addAll(items);
         notifyDataSetChanged();
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
     @Override
     public MoneyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext(),R.layout.item,null);
-        return new MoneyViewHolder(view,colorChoice);
+        return new MoneyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MoneyViewHolder holder, int position) {
-        holder.bindItem(items.get(position));
+        holder.bind(items.get(position));
+        holder.itemView.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -45,20 +66,19 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         private TextView nameView;
         private TextView priceView;
 
-        public MoneyViewHolder(@NonNull View itemView, final int colorChoice) {
+        public MoneyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nameView = itemView.findViewById(R.id.itemNameView);
             priceView = itemView.findViewById(R.id.itemPriceView);
 
-            final Context context = priceView.getContext();
-            priceView.setTextColor(ContextCompat.getColor(context,colorChoice));
         }
 
-        public void bindItem(final Item item) {
+        public void bind(Item item) {
 
             nameView.setText(item.getName());
-            priceView.setText(priceView.getContext().getResources().getString(R.string.currency,String.valueOf(item.getPrice())));
+            priceView.setText(item.getPrice());
+            priceView.setTextColor(ContextCompat.getColor(priceView.getContext(),item.getColor()));
         }
     }
 }

@@ -1,0 +1,15 @@
+package com.kpetrov.loftmoney;
+
+import io.reactivex.Single;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
+public interface MoneyApi {
+
+    // https://verdant-violet.glitch.me/items?type=expense")
+
+    @GET("./items")
+    Single<MoneyResponse> getMoney(@Query("type") String type);
+
+
+}

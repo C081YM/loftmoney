@@ -3,10 +3,11 @@ package com.kpetrov.loftmoney;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,14 +16,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class BudgetFragment extends Fragment {
 
+
+
     public static final int REQUEST_CODE = 20;
     public static final String COLOR_CHOICE = "colorChoice";
-    private ItemsAdapter adapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
+    ItemsAdapter adapter;
+
+    //private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public static BudgetFragment newInstance (final int colorChoice) {
@@ -44,8 +57,12 @@ public class BudgetFragment extends Fragment {
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        adapter = new ItemsAdapter(getArguments().getInt(COLOR_CHOICE));
+
+
+        adapter = new ItemsAdapter();
         recyclerView.setAdapter(adapter);
+
+
 
         /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -55,10 +72,21 @@ public class BudgetFragment extends Fragment {
             }
         });*/
 
+        //adapter.setData();
+
+
         return view;
     }
 
-    @Override
+
+
+
+
+
+
+
+
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode,@Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -71,7 +99,7 @@ public class BudgetFragment extends Fragment {
         }
 
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            adapter.addData(new Item(data.getStringExtra("name"),price));
+            adapter.addData(new Item(data.getStringExtra("name"),price,R.color.colorItemIncome));
         }
-    }
+    }*/
 }
