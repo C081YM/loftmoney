@@ -8,15 +8,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+
+    FloatingActionButton floatingActionButton;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     ItemsAdapter adapter;
 
     @Override
@@ -25,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycler);
+
+        floatingActionButton = findViewById(R.id.addExpenseView);
+
         adapter = new ItemsAdapter();
 
         recyclerView.setAdapter(adapter);
@@ -34,31 +52,62 @@ public class MainActivity extends AppCompatActivity {
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));                             //divider
         recyclerView.addItemDecoration(dividerItemDecoration);                                                                      //divider
 
-        adapter.setData(generateExpenses());
 
-        new Handler().postDelayed(new Runnable() {
+        configureAddExpenseView();
+
+        /*final Handler handler = new Handler();
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                adapter.addData(generateIncomes());
+                // print NEW THREAD activity
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // print MAIN THREAD activity
+                    }
+                });
             }
-        }, 3000);
+        }).start();*/
 
     }
 
-    private List<Item> generateExpenses() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
-        items.add(new Item("Milk","49", R.color.colorItemPrice));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        generateExpenses();
+    }
 
-        return items;
+    private void configureAddExpenseView() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),AddItemActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void generateExpenses() {
+        final List<Item> items = new ArrayList<>();
+        Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().getMoney("expense")
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MoneyResponse>() {
+                    @Override
+                    public void accept(MoneyResponse moneyResponse) throws Exception {
+                        Log.e("TAG","Success " + moneyResponse);
+                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
+                            items.add(Item.getInstance(moneyItem));
+                        }
+                        adapter.setData(items);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e("TAG","Error " + throwable);
+                    }
+                });
+        compositeDisposable.add(disposable);
     }
 
     private List<Item> generateIncomes() {
