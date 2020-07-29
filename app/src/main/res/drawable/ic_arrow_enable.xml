@@ -4,7 +4,7 @@
     android:viewportWidth="18"
     android:viewportHeight="14">
     <path
-        android:fillColor="#7ED321"
+        android:fillColor="@color/button_add_and_check_mark_color_selector"
         android:fillType="evenOdd"
         android:pathData="M5.6,10.6L1.4,6.4L0,7.8L5.6,13.4L17.6,1.4L16.2,0L5.6,10.6Z" />
 </vector>

@@ -1,5 +1,6 @@
 package com.kpetrov.loftmoney;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -7,16 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    //RecyclerView recyclerView;
 
     FloatingActionButton floatingActionButton;
 
@@ -39,21 +42,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recycler);
+        TabLayout tabLayout = findViewById(R.id.tabs);
 
-        floatingActionButton = findViewById(R.id.addExpenseView);
+
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        viewPager.setAdapter(new BudgetPagerAdapter(getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+
+        //recyclerView = findViewById(R.id.recycler);
+
+        floatingActionButton = findViewById(R.id.floatingActionButton);
 
         adapter = new ItemsAdapter();
 
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+        //recyclerView.setAdapter(adapter);
+       // recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);      //divider
-        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));                             //divider
-        recyclerView.addItemDecoration(dividerItemDecoration);                                                                      //divider
-
-
-        configureAddExpenseView();
+        //DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);      //divider
+        //dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));                             //divider
+        //recyclerView.addItemDecoration(dividerItemDecoration);                                                                      //divider
 
         /*final Handler handler = new Handler();
         new Thread(new Runnable() {
@@ -68,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }).start();*/
+
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setText(R.string.expenses);
+        tabLayout.getTabAt(1).setText(R.string.income);
+
+
+        configureAddExpenseView();
+
 
     }
 
@@ -108,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         compositeDisposable.add(disposable);
+
     }
 
     private List<Item> generateIncomes() {
@@ -126,6 +141,30 @@ public class MainActivity extends AppCompatActivity {
         return items;
     }
 
+    static class BudgetPagerAdapter extends FragmentPagerAdapter {
+
+        public BudgetPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return BudgetFragment.newInstance(R.color.colorItemPrice);
+                case 1:
+                    return BudgetFragment.newInstance(R.color.colorItemIncome);
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    }
 
 }
 

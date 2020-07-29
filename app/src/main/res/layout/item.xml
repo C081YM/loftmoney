@@ -12,29 +12,29 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp">
 
-    <TextView
-        android:id="@+id/itemNameView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginEnd="16dp"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/itemNameView" />
+        <TextView
+            android:id="@+id/itemNameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="16dp"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/itemNameView" />
 
-    <TextView
-        android:id="@+id/itemPriceView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:layout_gravity="center_vertical"
-        android:gravity="end" />
+        <TextView
+            android:id="@+id/itemPriceView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:gravity="end" />
     </LinearLayout>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
