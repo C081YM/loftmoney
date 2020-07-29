@@ -71,23 +71,9 @@ public class AddItemActivity extends AppCompatActivity {
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
 
-        //configureInputViews();
         configureExpenseAdding();
 
-        /*buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                String name = Objects.requireNonNull(etTitle.getText()).toString();
-                String price = Objects.requireNonNull(etPrice.getText()).toString();
 
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(price)) {
-                    setResult(
-                            RESULT_OK,
-                            new Intent().putExtra("name", name).putExtra("price", price));
-                    finish();
-                }
-            }
-        });*/
     }
 
     private void configureExpenseAdding () {
@@ -113,41 +99,4 @@ public class AddItemActivity extends AppCompatActivity {
         });
     }
 
-    /*private void configureInputViews(){
-        etTitle.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                name = Objects.requireNonNull(etTitle.getText()).toString();
-                checkInputs();
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        etPrice.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                value = Objects.requireNonNull(etPrice.getText()).toString();
-                checkInputs();
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-    }
-
-    private void checkInputs() {
-        boolean isEnabled = value != null && !value.isEmpty() && name != null && !name.isEmpty();
-
-        buttonAdd.setEnabled(isEnabled);
-        buttonAdd.setTextColor(ContextCompat.getColor(getApplicationContext(), isEnabled ? R.color.addItemActivity_buttonAdd_colorEnable : R.color.addItemActivity_buttonAdd_colorDisable));
-
-    }*/
 }

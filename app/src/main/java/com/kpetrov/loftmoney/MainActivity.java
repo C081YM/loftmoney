@@ -20,6 +20,9 @@ import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.datatype.DatatypeFactory;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,13 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    //RecyclerView recyclerView;
-
     FloatingActionButton floatingActionButton;
-
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    ItemsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,32 +45,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new BudgetPagerAdapter(getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
 
-        //recyclerView = findViewById(R.id.recycler);
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
-
-        adapter = new ItemsAdapter();
-
-        //recyclerView.setAdapter(adapter);
-       // recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-
-        //DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);      //divider
-        //dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));                             //divider
-        //recyclerView.addItemDecoration(dividerItemDecoration);                                                                      //divider
-
-        /*final Handler handler = new Handler();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // print NEW THREAD activity
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // print MAIN THREAD activity
-                    }
-                });
-            }
-        }).start();*/
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText(R.string.expenses);
@@ -82,13 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         configureAddExpenseView();
 
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        generateExpenses();
     }
 
     private void configureAddExpenseView() {
@@ -99,46 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void generateExpenses() {
-        final List<Item> items = new ArrayList<>();
-        Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().getMoney("expense")
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MoneyResponse>() {
-                    @Override
-                    public void accept(MoneyResponse moneyResponse) throws Exception {
-                        Log.e("TAG","Success " + moneyResponse);
-                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
-                            items.add(Item.getInstance(moneyItem));
-                        }
-                        adapter.setData(items);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e("TAG","Error " + throwable);
-                    }
-                });
-        compositeDisposable.add(disposable);
-
-    }
-
-    private List<Item> generateIncomes() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-        items.add(new Item("ZP","15000", R.color.colorItemIncome));
-
-        return items;
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {

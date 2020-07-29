@@ -21,11 +21,14 @@ import java.util.List;
 import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class BudgetFragment extends Fragment {
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     ItemsAdapter adapter;
 
@@ -54,21 +57,64 @@ public class BudgetFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-
-
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        generateExpense();
+        //generateIncomes();
+
     }
 
 
 
+    private void generateExpense() {
+        final List<Item> items = new ArrayList<>();
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("expense")
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MoneyResponse>() {
+                    @Override
+                    public void accept(MoneyResponse moneyResponse) throws Exception {
+                        Log.e("TAG", "Success " + moneyResponse);
+                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
+                            items.add(Item.getInstance(moneyItem));
+                        }
+                        adapter.setData(items);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e("TAG","Error " + throwable);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
 
-
-
-
-
-
-
+    private void generateIncomes() {
+        final List<Item> items = new ArrayList<>();
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("income")
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MoneyResponse>() {
+                    @Override
+                    public void accept(MoneyResponse moneyResponse) throws Exception {
+                        Log.e("TAG", "Success " + moneyResponse);
+                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
+                            items.add(Item.getInstance(moneyItem));
+                        }
+                        adapter.setData(items);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e("TAG","Error " + throwable);
+                    }
+                });
+        compositeDisposable.add(disposable);
+    }
 
 
 }
