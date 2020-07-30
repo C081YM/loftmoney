@@ -26,6 +26,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         notifyDataSetChanged();
     }
 
+    public void clearItems (List<Item> items) {                                 //
+        items.clear();                                                          //
+        notifyDataSetChanged();                                                 //
+    }
+
     @NonNull
     @Override
     public MoneyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

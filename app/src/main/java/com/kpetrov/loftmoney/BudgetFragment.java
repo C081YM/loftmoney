@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +24,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class BudgetFragment extends Fragment {
 
+    public static final int REQUEST_CODE = 100;
+
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
     ItemsAdapter adapter;
 
@@ -34,6 +40,16 @@ public class BudgetFragment extends Fragment {
         adapter = new ItemsAdapter();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
+
+        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                generateExpense();             // в видео здесь loadItems()
+            }
+        });*/
+
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
@@ -43,6 +59,8 @@ public class BudgetFragment extends Fragment {
 
         return view;
     }
+
+
 
     @Override
     public void onResume() {
@@ -59,15 +77,19 @@ public class BudgetFragment extends Fragment {
                     @Override
                     public void accept(MoneyResponse moneyResponse) throws Exception {
                         Log.e("TAG", "Success " + moneyResponse);
+                        //adapter.clearItems();
+                        //swipeRefreshLayout.setOnRefreshListener(false);                               //поставить false после получения ответа от сервера
                         for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
                             items.add(Item.getInstance(moneyItem));
                         }
                         adapter.setData(items);
+                                                    //
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.e("TAG","Error " + throwable);
+                        //swipeRefreshLayout.setRefreshing(false);                                      //
                     }
                 });
         compositeDisposable.add(disposable);

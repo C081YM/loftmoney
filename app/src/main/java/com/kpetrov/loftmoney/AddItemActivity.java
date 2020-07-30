@@ -9,7 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.List;
 import java.util.Objects;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -66,11 +71,33 @@ public class AddItemActivity extends AppCompatActivity {
         configureExpenseAdding();
     }
 
+    public Fragment getVisibleFragment(){
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if(!fragments.isEmpty()){
+            for(Fragment fragment : fragments){
+                if(fragment != null && fragment.isVisible())
+                    return fragment;
+            }
+        }
+        return null;
+    }
+
+
     private void configureExpenseAdding () {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(value, name, "expense")
+
+                String fragmentVisible;
+
+                if (getVisibleFragment().getClass()==BudgetFragment.class) {
+                    fragmentVisible = "expense";
+                } else
+                    fragmentVisible = "income";
+
+
+                compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(value, name, fragmentVisible)
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action() {

@@ -22,6 +22,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class IncomeFragment extends Fragment {
 
+    public static final int REQUEST_CODE = 20;
+
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     ItemsAdapter adapter;
