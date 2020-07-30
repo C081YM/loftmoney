@@ -1,23 +1,16 @@
 package com.kpetrov.loftmoney;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Action;
@@ -67,13 +60,10 @@ public class AddItemActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.editTextTitle);
         buttonAdd = findViewById(R.id.add_button);
 
-
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
 
         configureExpenseAdding();
-
-
     }
 
     private void configureExpenseAdding () {
@@ -98,5 +88,4 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
     }
-
 }

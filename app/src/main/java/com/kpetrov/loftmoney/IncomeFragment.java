@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class BudgetFragment extends Fragment {
+public class IncomeFragment extends Fragment {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -29,7 +29,7 @@ public class BudgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_budget,null);
+        View view = inflater.inflate(R.layout.fragment_income,null);
 
         adapter = new ItemsAdapter();
 
@@ -47,12 +47,12 @@ public class BudgetFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        generateExpense();
+        generateIncomes();
     }
 
-    private void generateExpense() {
+    private void generateIncomes() {
         final List<Item> items = new ArrayList<>();
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("expense")
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("income")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MoneyResponse>() {

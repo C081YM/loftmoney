@@ -14,8 +14,6 @@
             android:layout_height="wrap_content"
             app:title="@string/budget_accounting"
             android:paddingStart="24dp"
-            android:paddingBottom="12dp"
-            android:paddingTop="18dp"
             android:textSize="20sp"
             app:titleTextColor="@color/colorTextTabs"
             android:background="@color/colorTabs"
@@ -38,6 +36,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
+        android:src="@drawable/ic_action_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
