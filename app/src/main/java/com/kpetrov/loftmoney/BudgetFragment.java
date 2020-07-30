@@ -12,19 +12,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class BudgetFragment extends Fragment {
-
-    public static final int REQUEST_CODE = 100;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -35,23 +33,23 @@ public class BudgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_budget,null);
+        View view = inflater.inflate(R.layout.fragment_budget, null);
 
         adapter = new ItemsAdapter();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
-        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                generateExpense();             // в видео здесь loadItems()
+                generateExpense();
             }
-        });*/
-
-
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -59,7 +57,6 @@ public class BudgetFragment extends Fragment {
 
         return view;
     }
-
 
 
     @Override
@@ -73,23 +70,26 @@ public class BudgetFragment extends Fragment {
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("expense")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                })
                 .subscribe(new Consumer<MoneyResponse>() {
                     @Override
                     public void accept(MoneyResponse moneyResponse) throws Exception {
                         Log.e("TAG", "Success " + moneyResponse);
-                        //adapter.clearItems();
-                        //swipeRefreshLayout.setOnRefreshListener(false);                               //поставить false после получения ответа от сервера
+                        adapter.clearItems();
                         for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
                             items.add(Item.getInstance(moneyItem));
                         }
                         adapter.setData(items);
-                                                    //
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e("TAG","Error " + throwable);
-                        //swipeRefreshLayout.setRefreshing(false);                                      //
+                        Log.e("TAG", "Error " + throwable);
                     }
                 });
         compositeDisposable.add(disposable);

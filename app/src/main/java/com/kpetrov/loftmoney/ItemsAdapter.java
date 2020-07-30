@@ -26,7 +26,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         notifyDataSetChanged();
     }
 
-    public void clearItems (List<Item> items) {                                 //
+    public void clearItems () {                                 //
         items.clear();                                                          //
         notifyDataSetChanged();                                                 //
     }

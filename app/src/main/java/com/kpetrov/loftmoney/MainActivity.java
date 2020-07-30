@@ -14,7 +14,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-
     FloatingActionButton floatingActionButton;
 
     @Override
@@ -35,9 +34,13 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final int activeFragmentIndex = viewPager.getCurrentItem();
-                Fragment activeFragment = getSupportFragmentManager().getFragments().get(activeFragmentIndex);
-                activeFragment.startActivity(new Intent(MainActivity.this,AddItemActivity.class));
+                String tag;
+                if (viewPager.getCurrentItem() == 0) {
+                    tag = "expense";
+                } else {
+                    tag = "income";
+                }
+                startActivity(new Intent(MainActivity.this, AddItemActivity.class).putExtra("tag", tag));
             }
         });
     }
