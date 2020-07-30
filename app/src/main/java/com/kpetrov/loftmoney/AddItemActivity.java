@@ -71,33 +71,11 @@ public class AddItemActivity extends AppCompatActivity {
         configureExpenseAdding();
     }
 
-    public Fragment getVisibleFragment(){
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        List<Fragment> fragments = fragmentManager.getFragments();
-        if(!fragments.isEmpty()){
-            for(Fragment fragment : fragments){
-                if(fragment != null && fragment.isVisible())
-                    return fragment;
-            }
-        }
-        return null;
-    }
-
-
     private void configureExpenseAdding () {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                String fragmentVisible;
-
-                if (getVisibleFragment().getClass()==BudgetFragment.class) {
-                    fragmentVisible = "expense";
-                } else
-                    fragmentVisible = "income";
-
-
-                compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(value, name, fragmentVisible)
+                compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(value, name, getIntent().getExtras().getString("tag"))
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action() {
