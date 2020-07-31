@@ -9,12 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.List;
 import java.util.Objects;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -39,12 +34,22 @@ public class AddItemActivity extends AppCompatActivity {
         }
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            String changeColor = getIntent().getExtras().getString("tag");
+
             if (etPrice.getText() != null && etPrice.getText().toString().trim().length() > 0 && etTitle.getText() != null && etTitle.getText().toString().trim().length() > 0){
                 buttonAdd.setEnabled(true);
-                Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_enable);
-                buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
                 value = Objects.requireNonNull(etPrice.getText()).toString();
                 name = Objects.requireNonNull(etTitle.getText()).toString();
+                if (changeColor.equals("expense")) {
+                    buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
+                    Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_expense);
+                    buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                } else {
+                    buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemIncome));
+                    Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_income);
+                    buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                }
             } else {
                 buttonAdd.setEnabled(false);
                 Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_disable);
@@ -69,6 +74,21 @@ public class AddItemActivity extends AppCompatActivity {
         etTitle.addTextChangedListener(textWatcher);
 
         configureExpenseAdding();
+
+        changeColorText();
+    }
+
+    private void changeColorText() {
+
+        String changeColor = getIntent().getExtras().getString("tag");
+
+        if (changeColor.equals("expense"))  {
+            etTitle.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
+            etPrice.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
+        } else {
+            etTitle.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemIncome));
+            etPrice.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemIncome));
+        }
     }
 
     private void configureExpenseAdding () {

@@ -21,7 +21,6 @@
             android:layout_marginEnd="32dp"
             android:hint="@string/edittext_name_hint"
             android:inputType="text"
-            android:textColor="@color/addItemActivity_editText_color"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,7 +43,6 @@
             android:digits="0123456789."
             android:inputType="number"
             android:textSize="24sp"
-            android:textColor="@color/addItemActivity_editText_color"
             app:layout_constraintTop_toBottomOf="@id/editTextTitle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,7 +54,6 @@
         android:drawableStart="@drawable/ic_arrow_disable"
         android:enabled="false"
         android:text="@string/add_button_title"
-        android:textColor="@color/button_add_and_check_mark_color_selector"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
