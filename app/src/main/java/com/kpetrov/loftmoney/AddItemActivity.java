@@ -54,6 +54,7 @@ public class AddItemActivity extends AppCompatActivity {
                 buttonAdd.setEnabled(false);
                 Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_disable);
                 buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorDisable));
             }
         }
         @Override
