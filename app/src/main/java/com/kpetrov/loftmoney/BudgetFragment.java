@@ -58,7 +58,6 @@ public class BudgetFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();

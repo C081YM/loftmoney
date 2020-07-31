@@ -11,20 +11,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class IncomeFragment extends Fragment {
 
-    public static final int REQUEST_CODE = 20;
-
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
     ItemsAdapter adapter;
 
@@ -36,6 +38,16 @@ public class IncomeFragment extends Fragment {
         adapter = new ItemsAdapter();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                generateIncomes();
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
@@ -57,6 +69,12 @@ public class IncomeFragment extends Fragment {
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("income")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                })
                 .subscribe(new Consumer<MoneyResponse>() {
                     @Override
                     public void accept(MoneyResponse moneyResponse) throws Exception {
