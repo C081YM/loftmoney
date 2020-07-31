@@ -75,8 +75,9 @@ public class AddItemActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                String token = getSharedPreferences(getString(R.string.app_name),0).getString(LoftApp.TOKEN_KEY,"");
 
-                compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(value, name, getIntent().getExtras().getString("tag"))
+                compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, getIntent().getExtras().getString("tag"))
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action() {

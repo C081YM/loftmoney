@@ -66,7 +66,8 @@ public class IncomeFragment extends Fragment {
 
     private void generateIncomes() {
         final List<Item> items = new ArrayList<>();
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("income")
+        String token = ((LoftApp) getActivity().getApplicationContext()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"income")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(new Action() {
@@ -75,14 +76,14 @@ public class IncomeFragment extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 })
-                .subscribe(new Consumer<MoneyResponse>() {
+                .subscribe(new Consumer<List<MoneyItem>>() {
                     @Override
-                    public void accept(MoneyResponse moneyResponse) throws Exception {
-                        Log.e("TAG", "Success " + moneyResponse);
-                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
+                    public void accept(List<MoneyItem> moneyItems) throws Exception {
+                       adapter.clearItems();
+                       for (MoneyItem moneyItem : moneyItems) {
                             items.add(Item.getInstance(moneyItem));
-                        }
-                        adapter.setData(items);
+                       }
+                       adapter.setData(items);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

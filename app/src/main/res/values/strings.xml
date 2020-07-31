@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Loftmoney</string>
+    <string name="app_name">LoftMoney</string>
     <string name="edittext_name_hint">Title</string>
     <string name="edittext_price_hint">Price</string>
     <string name="add_button_title">Add</string>
@@ -9,5 +9,6 @@
     <string name="balance">Balance</string>
     <string name="budget_accounting">Budget accounting</string>
     <string name="currency">%s ₽</string>
+    <string name="welcome_login">SIGN IN</string>
 
 </resources>

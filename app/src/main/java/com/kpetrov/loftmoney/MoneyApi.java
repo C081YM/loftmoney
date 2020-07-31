@@ -1,5 +1,7 @@
 package com.kpetrov.loftmoney;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.http.Field;
@@ -10,15 +12,13 @@ import retrofit2.http.Query;
 
 public interface MoneyApi {
 
-    //https://verdant-violet.glitch.me/items?type=expense
-
     @GET("./items")
-    Single<MoneyResponse> getMoney(@Query("type") String type);
+    Single<List<MoneyItem>> getMoney(@Query("auth-token") String token, @Query("type") String type);
 
     @POST("./items/add")
     @FormUrlEncoded
-    Completable addMoney(@Field("price") String price,
+    Completable addMoney(@Field("auth-token") String token,
+                         @Field("price") String price,
                          @Field("name") String name,
                          @Field("type") String type);
-
 }

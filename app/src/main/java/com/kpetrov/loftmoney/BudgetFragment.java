@@ -66,7 +66,8 @@ public class BudgetFragment extends Fragment {
 
     private void generateExpense() {
         final List<Item> items = new ArrayList<>();
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney("expense")
+        String token = ((LoftApp) getActivity().getApplicationContext()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"expense")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(new Action() {
@@ -75,12 +76,11 @@ public class BudgetFragment extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 })
-                .subscribe(new Consumer<MoneyResponse>() {
+                .subscribe(new Consumer<List<MoneyItem>>() {
                     @Override
-                    public void accept(MoneyResponse moneyResponse) throws Exception {
-                        Log.e("TAG", "Success " + moneyResponse);
+                    public void accept(List<MoneyItem> moneyItems) throws Exception {
                         adapter.clearItems();
-                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
+                        for (MoneyItem moneyItem : moneyItems) {
                             items.add(Item.getInstance(moneyItem));
                         }
                         adapter.setData(items);
@@ -88,7 +88,7 @@ public class BudgetFragment extends Fragment {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e("TAG", "Error " + throwable);
+                        Log.e("TAG","Error " + throwable);
                     }
                 });
         compositeDisposable.add(disposable);
