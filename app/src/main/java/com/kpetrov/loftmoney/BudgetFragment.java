@@ -40,7 +40,6 @@ public class BudgetFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -62,6 +61,7 @@ public class BudgetFragment extends Fragment {
     public void onResume() {
         super.onResume();
         generateExpense();
+
     }
 
     private void generateExpense() {
@@ -74,6 +74,7 @@ public class BudgetFragment extends Fragment {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
+                        adapter.sortArrayList();                                                     //вызов сортировки
                     }
                 })
                 .subscribe(new Consumer<List<MoneyItem>>() {

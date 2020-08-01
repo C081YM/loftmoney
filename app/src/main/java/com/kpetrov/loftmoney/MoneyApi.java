@@ -1,7 +1,6 @@
 package com.kpetrov.loftmoney;
 
 import java.util.List;
-
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.http.Field;

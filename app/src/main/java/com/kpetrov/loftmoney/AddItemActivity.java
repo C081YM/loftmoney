@@ -41,7 +41,7 @@ public class AddItemActivity extends AppCompatActivity {
                 buttonAdd.setEnabled(true);
                 value = Objects.requireNonNull(etPrice.getText()).toString();
                 name = Objects.requireNonNull(etTitle.getText()).toString();
-                if (changeColor.equals("expense")) {
+                if (changeColor.equals("expense")) {                                                                          // АКТИВНАЯ кнопка "Добавить" меняет цвет в зависимости от фрагмента
                     buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
                     Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_expense);
                     buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
@@ -83,7 +83,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         String changeColor = getIntent().getExtras().getString("tag");
 
-        if (changeColor.equals("expense"))  {
+        if (changeColor.equals("expense"))  {                                                                      //изменение цвета вводимого текста в зависимости от фрагмента
             etTitle.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
             etPrice.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
         } else {

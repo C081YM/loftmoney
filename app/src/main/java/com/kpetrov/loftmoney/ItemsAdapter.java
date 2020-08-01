@@ -1,5 +1,4 @@
 package com.kpetrov.loftmoney;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +6,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHolder> {
@@ -26,9 +26,19 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         notifyDataSetChanged();
     }
 
-    public void clearItems () {                                 //
-        items.clear();                                                          //
-        notifyDataSetChanged();                                                 //
+    public void clearItems () {
+        items.clear();
+        notifyDataSetChanged();
+    }
+
+    void sortArrayList() {                                                           //сортировка
+        Collections.sort(items, new Comparator<Item>() {
+            @Override
+            public int compare(Item i1, Item i2) {
+                return i2.getDate().compareTo(i1.getDate());                         //если return i2 compareTo i1, то новые вверху списка
+            }                                                                        // если return i1 compareTo i2, то новые внизу списка
+        });
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,19 +60,23 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
     static class MoneyViewHolder extends RecyclerView.ViewHolder {
         TextView nameView;
         TextView priceView;
+        TextView dateView;
 
         public MoneyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nameView = itemView.findViewById(R.id.itemNameView);
             priceView = itemView.findViewById(R.id.itemPriceView);
+            dateView = itemView.findViewById(R.id.itemDateView);
+
         }
 
         public void bind(Item item) {
 
             nameView.setText(item.getName());
             priceView.setText(item.getPrice());
-            priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));     //передать контекст, контекст есть у любого визуального элемента
+            priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));
+            dateView.setText(item.getDate());                                                             // ввел для отображения даты, чтобы проверить сортировку по дате
         }
     }
 }

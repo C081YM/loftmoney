@@ -2,7 +2,6 @@ package com.kpetrov.loftmoney;
 
 import android.app.Application;
 import android.content.SharedPreferences;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

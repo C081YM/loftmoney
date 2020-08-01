@@ -55,6 +55,7 @@
         android:enabled="false"
         android:text="@string/add_button_title"
         android:textSize="14sp"
+        android:textColor="@color/colorDisable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

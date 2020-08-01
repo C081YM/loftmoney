@@ -29,14 +29,10 @@ public class SplashActivity extends AppCompatActivity {
     private void routeToMain(){
         Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(mainIntent);
-
     }
 
     private void routeToLogin(){
         Intent loginIntent = new Intent(getApplicationContext(),LoginActivity.class);
         startActivity(loginIntent);
-
     }
-
-
 }
