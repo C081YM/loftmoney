@@ -1,16 +1,14 @@
 package com.kpetrov.loftmoney;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import java.util.Random;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -18,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button loginButtonView;
+    private Button loginButtonView;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -43,10 +41,9 @@ public class LoginActivity extends AppCompatActivity {
                         .subscribe(new Consumer<AuthResponse>() {
                             @Override
                             public void accept(AuthResponse authResponse) throws Exception {
-                                ((LoftApp) getApplication()).getSharedPreferences()
-                                        .edit()
-                                        .putString(LoftApp.TOKEN_KEY, authResponse.getAccessToken())
-                                        .apply();
+                                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).edit();
+                                editor.putString(Prefs.TOKEN, authResponse.getAccessToken());
+                                editor.apply();
 
                                 Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(mainIntent);

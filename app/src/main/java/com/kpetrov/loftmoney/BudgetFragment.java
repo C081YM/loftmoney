@@ -1,6 +1,7 @@
 package com.kpetrov.loftmoney;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,9 @@ public class BudgetFragment extends Fragment {
 
     private void generateExpense() {
         final List<Item> items = new ArrayList<>();
-        String token = ((LoftApp) getActivity().getApplicationContext()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+
+        final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN,"");
+
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"expense")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())

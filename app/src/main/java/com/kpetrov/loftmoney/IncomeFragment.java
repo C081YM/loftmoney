@@ -1,6 +1,7 @@
 package com.kpetrov.loftmoney;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,9 @@ public class IncomeFragment extends Fragment {
 
     private void generateIncomes() {
         final List<Item> items = new ArrayList<>();
-        String token = ((LoftApp) getActivity().getApplicationContext()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+
+        final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN,"");
+
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"income")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -79,11 +82,11 @@ public class IncomeFragment extends Fragment {
                 .subscribe(new Consumer<List<MoneyItem>>() {
                     @Override
                     public void accept(List<MoneyItem> moneyItems) throws Exception {
-                       adapter.clearItems();
-                       for (MoneyItem moneyItem : moneyItems) {
+                        adapter.clearItems();
+                        for (MoneyItem moneyItem : moneyItems) {
                             items.add(Item.getInstance(moneyItem));
-                       }
-                       adapter.setData(items);
+                        }
+                        adapter.setData(items);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

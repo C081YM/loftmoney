@@ -2,6 +2,7 @@ package com.kpetrov.loftmoney;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,12 +20,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    TextInputEditText etTitle;
-    TextInputEditText etPrice;
-    Button buttonAdd;
+    private TextInputEditText etTitle;
+    private TextInputEditText etPrice;
+    private Button buttonAdd;
 
-    String name;
-    String value;
+    private String name;
+    private String value;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -41,6 +42,7 @@ public class AddItemActivity extends AppCompatActivity {
                 buttonAdd.setEnabled(true);
                 value = Objects.requireNonNull(etPrice.getText()).toString();
                 name = Objects.requireNonNull(etTitle.getText()).toString();
+
                 if (changeColor.equals("expense")) {                                                                          // АКТИВНАЯ кнопка "Добавить" меняет цвет в зависимости от фрагмента
                     buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
                     Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_expense);
@@ -96,7 +98,8 @@ public class AddItemActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String token = getSharedPreferences(getString(R.string.app_name),0).getString(LoftApp.TOKEN_KEY,"");
+
+                final String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(Prefs.TOKEN,"");
 
                 compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, getIntent().getExtras().getString("tag"))
                         .subscribeOn(Schedulers.computation())

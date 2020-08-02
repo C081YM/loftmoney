@@ -1,9 +1,9 @@
 package com.kpetrov.loftmoney;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 public class SplashActivity extends AppCompatActivity {
@@ -17,7 +17,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkToken() {
-        String token = ((LoftApp) getApplicationContext()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+
+        final String token = PreferenceManager.getDefaultSharedPreferences(this).getString(Prefs.TOKEN,"");
 
         if (TextUtils.isEmpty(token)) {
             routeToLogin();
