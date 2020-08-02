@@ -39,24 +39,29 @@ public class AddItemActivity extends AppCompatActivity {
             String changeColor = getIntent().getExtras().getString("tag");
 
             if (etPrice.getText() != null && etPrice.getText().toString().trim().length() > 0 && etTitle.getText() != null && etTitle.getText().toString().trim().length() > 0){
-                buttonAdd.setEnabled(true);
+
                 value = Objects.requireNonNull(etPrice.getText()).toString();
                 name = Objects.requireNonNull(etTitle.getText()).toString();
 
-                if (changeColor.equals("expense")) {                                                                          // АКТИВНАЯ кнопка "Добавить" меняет цвет в зависимости от фрагмента
-                    buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
-                    Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_expense);
-                    buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
-                } else {
-                    buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemIncome));
-                    Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_income);
-                    buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                if (!buttonAdd.isEnabled()) {
+                    if (changeColor.equals("expense")) {                                                                          // АКТИВНАЯ кнопка "Добавить" меняет цвет в зависимости от фрагмента
+                        buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
+                        Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_expense);
+                        buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                    } else {
+                        buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemIncome));
+                        Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_income);
+                        buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                    }
                 }
+                buttonAdd.setEnabled(true);
             } else {
+                if (buttonAdd.isEnabled()) {
+                    Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_disable);
+                    buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+                    buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorDisable));
+                }
                 buttonAdd.setEnabled(false);
-                Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_arrow_disable);
-                buttonAdd.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
-                buttonAdd.setTextColor(getApplicationContext().getResources().getColor(R.color.colorDisable));
             }
         }
         @Override

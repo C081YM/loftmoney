@@ -62,7 +62,6 @@ public class BudgetFragment extends Fragment {
     public void onResume() {
         super.onResume();
         generateExpense();
-
     }
 
     private void generateExpense() {

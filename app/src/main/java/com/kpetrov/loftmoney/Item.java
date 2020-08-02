@@ -15,7 +15,6 @@ public class Item {
 
     public static Item getInstance(MoneyItem moneyItem) {
         return new Item(moneyItem.getName(),moneyItem.getPrice() + " ₽", moneyItem.getType().equals("expense") ? R.color.colorItemPrice : R.color.colorItemIncome, moneyItem.getDate());
-
     }
 
     public String getName() {
