@@ -10,5 +10,8 @@
     <string name="budget_accounting">Budget accounting</string>
     <string name="currency">%s ₽</string>
     <string name="welcome_login">SIGN IN</string>
+    <string name="selected">Selected: %1$s</string>
+    <string name="removeItem">Remove</string>
+    <string name="confirmation">Do you really want to remove this items?</string>
 
 </resources>

@@ -10,5 +10,8 @@
     <string name="budget_accounting">Учет бюджета</string>
     <string name="currency">%s ₽</string>
     <string name="welcome_login">ВОЙТИ</string>
+    <string name="selected">Выделено: %1$s</string>
+    <string name="removeItem">Удалить</string>
+    <string name="confirmation">Вы действительно хотите удалить выбранные элементы?</string>
 
 </resources>
