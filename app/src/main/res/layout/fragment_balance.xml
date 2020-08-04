@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/availableFinances" />
 
     <TextView
-        android:id="@+id/txtExpense"
+        android:id="@+id/txtExpenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dividerHorizontal1" />
 
     <TextView
-        android:id="@+id/expense"
+        android:id="@+id/expenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -69,7 +69,7 @@
         android:gravity="end"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtExpense" />
+        app:layout_constraintTop_toBottomOf="@+id/txtExpenses" />
 
     <View
         android:id="@+id/dividerVertical"
@@ -88,7 +88,7 @@
         android:background="@color/borders" />
 
     <TextView
-        android:id="@+id/txtIncome"
+        android:id="@+id/txtIncomes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -103,7 +103,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dividerHorizontal1" />
 
     <TextView
-        android:id="@+id/income"
+        android:id="@+id/incomes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -115,7 +115,7 @@
         android:gravity="end"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@id/dividerVertical"
-        app:layout_constraintTop_toBottomOf="@+id/txtIncome" />
+        app:layout_constraintTop_toBottomOf="@+id/txtIncomes" />
 
     <com.kpetrov.loftmoney.BalanceView
         android:id="@+id/balanceView"
