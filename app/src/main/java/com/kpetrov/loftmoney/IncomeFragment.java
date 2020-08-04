@@ -23,7 +23,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class BudgetFragment extends Fragment {
+public class IncomeFragment extends Fragment {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -34,7 +34,7 @@ public class BudgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_budget, null);
+        View view = inflater.inflate(R.layout.fragment_income,null);
 
         adapter = new ItemsAdapter();
 
@@ -44,12 +44,12 @@ public class BudgetFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                generateExpense();
+                generateIncomes();
             }
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()),DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -61,22 +61,22 @@ public class BudgetFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        generateExpense();
+        generateIncomes();
     }
 
-    private void generateExpense() {
+    private void generateIncomes() {
         final List<Item> items = new ArrayList<>();
 
         final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN,"");
 
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"expense")
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"income")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(new Action() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
-                        adapter.sortArrayList();                                                     //вызов сортировки
+                        adapter.sortArrayList();                                                      //вызов сортировки
                     }
                 })
                 .subscribe(new Consumer<List<MoneyItem>>() {

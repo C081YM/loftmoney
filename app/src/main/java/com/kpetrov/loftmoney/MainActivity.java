@@ -2,14 +2,19 @@ package com.kpetrov.loftmoney;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
+import android.view.View;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +23,26 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tabs);
 
-        ViewPager viewPager = findViewById(R.id.viewpager);
+        final ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new BudgetPagerAdapter(getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.income);
+
+        floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                String tag;
+                if (viewPager.getCurrentItem() == 0) {
+                    tag = "expense";
+                } else {
+                    tag = "income";
+                }
+                startActivity(new Intent(MainActivity.this, AddItemActivity.class).putExtra("tag", tag));
+            }
+        });
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {
@@ -37,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return BudgetFragment.newInstance(R.color.colorItemPrice);
+                    return new BudgetFragment();
                 case 1:
-                    return BudgetFragment.newInstance(R.color.colorItemIncome);
+                    return new IncomeFragment();
                 default:
                     return null;
             }
@@ -51,6 +70,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
 
 

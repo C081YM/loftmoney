@@ -4,11 +4,11 @@
     <string name="edittext_price_hint">Цена</string>
     <string name="add_button_title">Добавить</string>
     <string name="add">Добавить</string>
-    <string name="plusAddButton">+</string>
     <string name="expenses">Расходы</string>
     <string name="income">Доходы</string>
     <string name="balance">Баланс</string>
     <string name="budget_accounting">Учет бюджета</string>
     <string name="currency">%s ₽</string>
+    <string name="welcome_login">ВОЙТИ</string>
 
 </resources>

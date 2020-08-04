@@ -2,11 +2,19 @@ package com.kpetrov.loftmoney;
 
 public class Item {
     private String name;
-    private int price;
+    private String price;
+    private Integer color;
+    private String date;
 
-    public Item(String name, int price) {
+    public Item(String name, String price, Integer color, String date) {
         this.name = name;
         this.price = price;
+        this.color = color;
+        this.date = date;
+    }
+
+    public static Item getInstance(MoneyItem moneyItem) {
+        return new Item(moneyItem.getName(),moneyItem.getPrice() + " ₽", moneyItem.getType().equals("expense") ? R.color.colorItemPrice : R.color.colorItemIncome, moneyItem.getDate());
     }
 
     public String getName() {
@@ -17,11 +25,20 @@ public class Item {
         this.name = name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
+
+    public Integer getColor() {
+    return color;
+   }
+
+    public String getDate() {
+        return date;
+    }
+
 }
