@@ -13,5 +13,8 @@
     <string name="selected">Выделено: %1$s</string>
     <string name="removeItem">Удалить</string>
     <string name="confirmation">Вы действительно хотите удалить выбранные элементы?</string>
+    <string name="txtAvailableFinances">Доступные финансы</string>
+    <string name="txtExpense">Расход</string>
+    <string name="txtIncome">Доход</string>
 
 </resources>

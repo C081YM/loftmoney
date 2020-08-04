@@ -13,5 +13,8 @@
     <string name="selected">Selected: %1$s</string>
     <string name="removeItem">Remove</string>
     <string name="confirmation">Do you really want to remove this items?</string>
+    <string name="txtAvailableFinances">Available finances</string>
+    <string name="txtExpense">Expense</string>
+    <string name="txtIncome">Income</string>
 
 </resources>

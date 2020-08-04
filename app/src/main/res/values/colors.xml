@@ -18,4 +18,5 @@
     <color name="colorBudgetAccountingText">#ffffff</color>
     <color name="actionModeBackground">#333f59</color>
     <color name="itemSelected">#f2f2f2</color>
+    <color name="availableFinances">#ff9e57</color>
 </resources>

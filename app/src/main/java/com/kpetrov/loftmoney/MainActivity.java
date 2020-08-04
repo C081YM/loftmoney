@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(viewPager);
         mTabLayout.getTabAt(0).setText(R.string.expenses);
         mTabLayout.getTabAt(1).setText(R.string.income);
+        mTabLayout.getTabAt(2).setText(R.string.balance);
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
                     return new BudgetFragment();
                 case 1:
                     return new IncomeFragment();
+                case 2:
+                    return new BalanceFragment();
                 default:
                     return null;
             }
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 }
