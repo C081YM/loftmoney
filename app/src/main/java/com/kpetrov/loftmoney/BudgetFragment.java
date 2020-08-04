@@ -114,9 +114,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         if (mActionMode != null) {
             mActionMode.setTitle(getString(R.string.selected, String.valueOf(adapter.getSelectedSize())));
         }
-
-
-
     }
 
     @Override
@@ -128,8 +125,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         if (mActionMode != null) {
             mActionMode.setTitle(getString(R.string.selected, String.valueOf(adapter.getSelectedSize())));
         }
-
-
     }
 
     @Override
@@ -153,9 +148,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
                             removeItems();
-
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -178,12 +171,9 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                      @Override
                      public void run() throws Exception {
                          Log.e("TAG", "Completed");
-
                          generateExpense();
                          adapter.clearSelections();
-
                      }
-
                  }, new Consumer<Throwable>() {
                      @Override
                      public void accept(Throwable throwable) throws Exception {
@@ -192,14 +182,11 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                  });
         compositeDisposable.add(disposable);
         }
-
-
     }
 
     @Override
     public void onDestroyActionMode(final ActionMode actionMode) {
         mActionMode = null;
         adapter.clearSelections();
-
     }
 }

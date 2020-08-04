@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -12,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
-
 import android.view.ActionMode;
 import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddItemActivity.class).putExtra("tag", tag));
             }
         });
-
     }
 
     @Override
@@ -60,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActionModeStarted(mode);
         mTabLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.actionModeBackground));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.actionModeBackground));
+        floatingActionButton.setVisibility(View.INVISIBLE);                                          // floatingActionButton не видна
     }
 
     @Override
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActionModeFinished(mode);
         mTabLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
+        floatingActionButton.setVisibility(View.VISIBLE);                                            // floatingActionButton видна
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {
