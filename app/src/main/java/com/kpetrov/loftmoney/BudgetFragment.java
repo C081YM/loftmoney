@@ -150,7 +150,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             removeItems();
-
+                            actionMode.finish();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -175,7 +175,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                          Log.e("TAG", "Completed remove expenses");
                          generateExpense();
                          adapter.clearSelections();
-
                      }
                  }, new Consumer<Throwable>() {
                      @Override

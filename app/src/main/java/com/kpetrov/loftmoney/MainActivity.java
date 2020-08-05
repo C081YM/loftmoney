@@ -1,6 +1,7 @@
 package com.kpetrov.loftmoney;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddItemActivity.class).putExtra("tag", tag));
             }
         });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+
+                    floatingActionButton.hide();
+
+                } else {
+                    floatingActionButton.show();
+
+
+                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override
@@ -58,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActionModeStarted(mode);
         mTabLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.actionModeBackground));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.actionModeBackground));
-        floatingActionButton.setVisibility(View.INVISIBLE);                                          // floatingActionButton не видна
+        floatingActionButton.hide();                                          // скрыть floatingActionButton
     }
 
     @Override
@@ -66,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActionModeFinished(mode);
         mTabLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
-        floatingActionButton.setVisibility(View.VISIBLE);                                            // floatingActionButton видна
+        floatingActionButton.show();                                            // вернуть floatingActionButton
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {
@@ -96,5 +118,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-

@@ -151,6 +151,7 @@ public class IncomeFragment extends Fragment implements ItemsAdapterListener, Ac
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             removeItems();
+                            actionMode.finish();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

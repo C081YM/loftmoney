@@ -43,12 +43,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
             }
         }
         return result;
-
-
     }
 
-
-
+    public int updateSelectedSize(){    //
+        return getSelectedSize();        //
+    }                                    //
 
     public List<Integer> getSelectedItemsId () {
         List<Integer> result = new ArrayList<>();
