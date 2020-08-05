@@ -47,9 +47,14 @@ public class BalanceFragment extends Fragment {
             }
         });
 
-        loadTotalValues();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadTotalValues();
     }
 
     public void loadTotalValues() {
@@ -68,7 +73,7 @@ public class BalanceFragment extends Fragment {
                 .subscribe(new Consumer<BalanceResponse>() {
                     @Override
                     public void accept(BalanceResponse balanceResponse) throws Exception {
-                        Log.e("TAG", "Completed");
+                        Log.e("TAG", "Completed load total values");
 
                         final String totalExpenses = balanceResponse.getTotalExpenses();
                         final String totalIncomes = balanceResponse.getTotalIncomes();

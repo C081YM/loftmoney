@@ -85,6 +85,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                 .doAfterTerminate(new Action() {
                     @Override
                     public void run() {
+                        Log.e("TAG", "Completed generate expenses");
                         swipeRefreshLayout.setRefreshing(false);
                         adapter.sortArrayList();                                                     //вызов сортировки
                     }
@@ -149,6 +150,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             removeItems();
+
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -170,9 +172,10 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                  .subscribe(new Action() {
                      @Override
                      public void run() throws Exception {
-                         Log.e("TAG", "Completed");
+                         Log.e("TAG", "Completed remove expenses");
                          generateExpense();
                          adapter.clearSelections();
+
                      }
                  }, new Consumer<Throwable>() {
                      @Override
