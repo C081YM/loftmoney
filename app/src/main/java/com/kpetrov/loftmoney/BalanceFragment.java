@@ -21,9 +21,7 @@ import io.reactivex.schedulers.Schedulers;
 public class BalanceFragment extends Fragment {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     SwipeRefreshLayout swipeRefreshLayout;
-
     private TextView balanceExpenses;
     private TextView balanceIncomes;
     private TextView availableFinances;
@@ -47,7 +45,6 @@ public class BalanceFragment extends Fragment {
             }
         });
 
-
         return view;
     }
 
@@ -58,7 +55,6 @@ public class BalanceFragment extends Fragment {
     }
 
     public void loadTotalValues() {
-
         final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN, "");
 
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getBalance(token)

@@ -17,7 +17,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
     List<Item> items = new ArrayList<>();
 
     private ItemsAdapterListener mListener;
-
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray();
 
     public void clearSelections() {
@@ -44,10 +43,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
         }
         return result;
     }
-
-    public int updateSelectedSize(){    //
-        return getSelectedSize();        //
-    }                                    //
 
     public List<Integer> getSelectedItemsId () {
         List<Integer> result = new ArrayList<>();
@@ -124,7 +119,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
 
         public void bind(Item item, final boolean isSelected) {
             itemView.setSelected(isSelected);
-
             nameView.setText(item.getName());
             priceView.setText(item.getPrice());
             priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));
@@ -146,10 +140,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
                     return false;
                 }
             });
-
         }
-
-
-
     }
 }

@@ -32,11 +32,8 @@ import io.reactivex.schedulers.Schedulers;
 public class IncomeFragment extends Fragment implements ItemsAdapterListener, ActionMode.Callback {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     SwipeRefreshLayout swipeRefreshLayout;
-
     ItemsAdapter adapter;
-
     private ActionMode mActionMode;
 
     @Nullable
@@ -45,10 +42,7 @@ public class IncomeFragment extends Fragment implements ItemsAdapterListener, Ac
         View view = inflater.inflate(R.layout.fragment_income, null);
 
         adapter = new ItemsAdapter();
-
         adapter.setListener(this);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -58,11 +52,11 @@ public class IncomeFragment extends Fragment implements ItemsAdapterListener, Ac
             }
         });
 
+        RecyclerView recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
-
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -72,12 +66,10 @@ public class IncomeFragment extends Fragment implements ItemsAdapterListener, Ac
     public void onResume() {
         super.onResume();
         generateIncome();
-
     }
 
     private void generateIncome() {
         final List<Item> items = new ArrayList<>();
-
         final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN,"");
 
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"income")

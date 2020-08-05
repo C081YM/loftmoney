@@ -1,7 +1,6 @@
 package com.kpetrov.loftmoney;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButton;
-
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
 
@@ -60,13 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 2) {
-
                     floatingActionButton.hide();
-
                 } else {
                     floatingActionButton.show();
-
-
                 }
             }
             @Override
