@@ -10,15 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class BalanceFragment extends Fragment {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private TextView balanceExpenses;
     private TextView balanceIncomes;
@@ -35,6 +39,14 @@ public class BalanceFragment extends Fragment {
         availableFinances = view.findViewById(R.id.availableFinances);
         balanceView = view.findViewById(R.id.balanceView);
 
+        swipeRefreshLayout = view.findViewById(R.id.balance_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+            loadTotalValues();
+            }
+        });
+
         loadTotalValues();
 
         return view;
@@ -47,6 +59,12 @@ public class BalanceFragment extends Fragment {
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getBalance(token)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                })
                 .subscribe(new Consumer<BalanceResponse>() {
                     @Override
                     public void accept(BalanceResponse balanceResponse) throws Exception {

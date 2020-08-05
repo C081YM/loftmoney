@@ -30,4 +30,5 @@ public class BalanceResponse {
     public void setTotalIncomes(String totalIncomes) {
         this.totalIncomes = totalIncomes;
     }
+
 }
