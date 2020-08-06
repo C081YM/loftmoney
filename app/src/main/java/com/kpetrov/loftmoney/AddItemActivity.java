@@ -84,9 +84,9 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     @Override
-    public void finish() {                                                                           //анимация при закрытии (слайд)
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+    public void onBackPressed() {                                                                             //анимация при нажатии кнопки назад (слайд)
+        super.onBackPressed();
+        AddItemActivity.this.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
     }
 
     private void changeColorText() {
@@ -113,6 +113,7 @@ public class AddItemActivity extends AppCompatActivity {
                             public void run() throws Exception {
                                 Log.e("TAG","Completed");
                                 finish();
+                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);           //анимация (слайд)
                             }
                         }, new Consumer<Throwable>() {
                             @Override
