@@ -29,14 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         configureButton();
     }
 
-    @Override                                                                                          // анимация выцветания
-    protected void onPause() {
-        super.onPause();
-        if (isFinishing()) {
-            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-        }
-    }
-
     private void configureButton() {
         loginButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(mainIntent);
+                                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);             //анимация выцветания
                             }
                         }, new Consumer<Throwable>() {
                             @Override

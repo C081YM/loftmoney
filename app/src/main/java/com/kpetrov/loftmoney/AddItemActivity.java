@@ -71,14 +71,11 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);                    //
-
         setContentView(R.layout.activity_add_item);
 
         etPrice = findViewById(R.id.editTextPrice);
         etTitle = findViewById(R.id.editTextTitle);
         buttonAdd = findViewById(R.id.add_button);
-
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
 
@@ -86,12 +83,10 @@ public class AddItemActivity extends AppCompatActivity {
         changeColorText();
     }
 
-    @Override                                                                                          //
-    protected void onPause() {
-        super.onPause();
-        if (isFinishing()) {
-            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-        }
+    @Override
+    public void finish() {                                                                           //анимация при закрытии (слайд)
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
     }
 
     private void changeColorText() {

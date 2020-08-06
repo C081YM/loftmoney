@@ -48,14 +48,13 @@ public class MainActivity extends AppCompatActivity {
                     tag = "income";
                 }
                 startActivity(new Intent(MainActivity.this, AddItemActivity.class).putExtra("tag", tag));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);               //анимация при закрытии(слайд)
             }
         });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
             }
             @Override
             public void onPageSelected(int position) {
@@ -69,12 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-
     }
-
-
-
-
 
     @Override
     public void onActionModeStarted(ActionMode mode) {
