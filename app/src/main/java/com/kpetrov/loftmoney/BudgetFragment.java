@@ -101,7 +101,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         compositeDisposable.add(disposable);
     }
 
-
     @Override
     public void onItemClick(final Item item, int position) {
         adapter.clearItem(position);

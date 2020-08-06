@@ -17,7 +17,6 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButtonView;
-
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
@@ -28,6 +27,14 @@ public class LoginActivity extends AppCompatActivity {
         loginButtonView = findViewById(R.id.loginButtonView);
 
         configureButton();
+    }
+
+    @Override                                                                                          // анимация выцветания
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        }
     }
 
     private void configureButton() {

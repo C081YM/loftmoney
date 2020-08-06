@@ -23,7 +23,6 @@ public class AddItemActivity extends AppCompatActivity {
     private TextInputEditText etTitle;
     private TextInputEditText etPrice;
     private Button buttonAdd;
-
     private String name;
     private String value;
 
@@ -72,6 +71,8 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);                    //
+
         setContentView(R.layout.activity_add_item);
 
         etPrice = findViewById(R.id.editTextPrice);
@@ -82,14 +83,19 @@ public class AddItemActivity extends AppCompatActivity {
         etTitle.addTextChangedListener(textWatcher);
 
         configureExpenseAdding();
-
         changeColorText();
     }
 
+    @Override                                                                                          //
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        }
+    }
+
     private void changeColorText() {
-
         String changeColor = getIntent().getExtras().getString("tag");
-
         if (changeColor.equals("expense"))  {                                                                      //изменение цвета вводимого текста в зависимости от фрагмента
             etTitle.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
             etPrice.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
@@ -103,9 +109,7 @@ public class AddItemActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 final String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(Prefs.TOKEN,"");
-
                 compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, getIntent().getExtras().getString("tag"))
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())

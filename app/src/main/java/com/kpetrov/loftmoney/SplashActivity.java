@@ -12,14 +12,19 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash2);
-
         checkToken();
     }
 
+    @Override                                                                                          // анимация выцветания
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        }
+    }
+
     private void checkToken() {
-
         final String token = PreferenceManager.getDefaultSharedPreferences(this).getString(Prefs.TOKEN,"");
-
         if (TextUtils.isEmpty(token)) {
             routeToLogin();
         } else {
