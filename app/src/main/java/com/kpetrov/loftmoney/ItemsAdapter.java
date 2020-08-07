@@ -106,15 +106,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
     static class MoneyViewHolder extends RecyclerView.ViewHolder {
         TextView nameView;
         TextView priceView;
-        TextView dateView;
 
         public MoneyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nameView = itemView.findViewById(R.id.itemNameView);
             priceView = itemView.findViewById(R.id.itemPriceView);
-            dateView = itemView.findViewById(R.id.itemDateView);
-
         }
 
         public void bind(Item item, final boolean isSelected) {
@@ -122,7 +119,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MoneyViewHol
             nameView.setText(item.getName());
             priceView.setText(item.getPrice());
             priceView.setTextColor(ContextCompat.getColor(priceView.getContext(), item.getColor()));
-            dateView.setText(item.getDate());                                                             // ввел для отображения даты, чтобы проверить сортировку по дате
         }
 
         public void setListener(final ItemsAdapterListener listener, final Item item, final int position) {

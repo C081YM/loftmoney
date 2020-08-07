@@ -159,22 +159,22 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         List<Integer> selectedItems = adapter.getSelectedItemsId();
         for (Integer itemId : selectedItems) {
             Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().removeItem(String.valueOf(itemId.intValue()), token)
-                 .subscribeOn(Schedulers.computation())
-                 .observeOn(AndroidSchedulers.mainThread())
-                 .subscribe(new Action() {
-                     @Override
-                     public void run() throws Exception {
-                         Log.e("TAG", "Completed remove expenses");
-                         generateExpense();
-                         adapter.clearSelections();
-                     }
-                 }, new Consumer<Throwable>() {
-                     @Override
-                     public void accept(Throwable throwable) throws Exception {
-                         Log.e("TAG", "Error" + throwable.getLocalizedMessage());
-                     }
-                 });
-        compositeDisposable.add(disposable);
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            Log.e("TAG", "Completed remove expenses");
+                            generateExpense();
+                            adapter.clearSelections();
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Log.e("TAG", "Error" + throwable.getLocalizedMessage());
+                        }
+                    });
+            compositeDisposable.add(disposable);
         }
     }
 
