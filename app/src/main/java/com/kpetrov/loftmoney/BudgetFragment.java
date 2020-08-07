@@ -68,6 +68,14 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         generateExpense();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mActionMode != null) {
+            mActionMode.finish();
+        }
+    }
+
     private void generateExpense() {
         final List<Item> items = new ArrayList<>();
         final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN,"");

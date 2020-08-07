@@ -68,6 +68,14 @@ public class IncomeFragment extends Fragment implements ItemsAdapterListener, Ac
         generateIncome();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mActionMode != null) {
+            mActionMode.finish();
+        }
+    }
+
     private void generateIncome() {
         final List<Item> items = new ArrayList<>();
         final String token = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Prefs.TOKEN,"");
