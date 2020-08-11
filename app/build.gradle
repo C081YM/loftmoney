@@ -61,9 +61,9 @@ android {
         beta {
 
             resValue("string", "app_name", "loftmoney-beta")
-            resValue("color", "colorPrimary", "#008080")
-            resValue("color", "colorPrimaryDark", "#116062")
-            resValue("color", "colorAccent", "#ffff00")
+            resValue("color", "colorPrimary", "#0095b6")
+            resValue("color", "colorPrimaryDark", "#007ba7")
+            resValue("color", "colorAccent", "#d2691e")
             applicationIdSuffix ".beta"
         }
     }

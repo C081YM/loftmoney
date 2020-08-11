@@ -18,14 +18,14 @@
             android:paddingStart="24dp"
             android:textSize="20sp"
             app:titleTextColor="@color/colorTextTabs"
-            android:background="@color/colorTabs"
+            android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|snap"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorTabs"
+            android:background="@color/colorPrimary"
             app:tabTextColor="@color/colorUnselectedTabs"
             app:tabSelectedTextColor="@color/colorTextTabs"/>
     </com.google.android.material.appbar.AppBarLayout>
