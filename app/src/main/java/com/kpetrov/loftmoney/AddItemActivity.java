@@ -23,7 +23,6 @@ public class AddItemActivity extends AppCompatActivity {
     private TextInputEditText etTitle;
     private TextInputEditText etPrice;
     private Button buttonAdd;
-
     private String name;
     private String value;
 
@@ -77,19 +76,21 @@ public class AddItemActivity extends AppCompatActivity {
         etPrice = findViewById(R.id.editTextPrice);
         etTitle = findViewById(R.id.editTextTitle);
         buttonAdd = findViewById(R.id.add_button);
-
         etPrice.addTextChangedListener(textWatcher);
         etTitle.addTextChangedListener(textWatcher);
 
         configureExpenseAdding();
-
         changeColorText();
     }
 
+    @Override
+    public void onBackPressed() {                                                                             //анимация при нажатии кнопки назад (слайд)
+        super.onBackPressed();
+        AddItemActivity.this.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+    }
+
     private void changeColorText() {
-
         String changeColor = getIntent().getExtras().getString("tag");
-
         if (changeColor.equals("expense"))  {                                                                      //изменение цвета вводимого текста в зависимости от фрагмента
             etTitle.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
             etPrice.setTextColor(getApplicationContext().getResources().getColor(R.color.colorItemPrice));
@@ -103,9 +104,7 @@ public class AddItemActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 final String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(Prefs.TOKEN,"");
-
                 compositeDisposable.add(((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, getIntent().getExtras().getString("tag"))
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -114,6 +113,7 @@ public class AddItemActivity extends AppCompatActivity {
                             public void run() throws Exception {
                                 Log.e("TAG","Completed");
                                 finish();
+                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);           //анимация (слайд)
                             }
                         }, new Consumer<Throwable>() {
                             @Override

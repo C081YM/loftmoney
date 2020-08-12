@@ -20,4 +20,10 @@ public interface MoneyApi {
                          @Field("price") String price,
                          @Field("name") String name,
                          @Field("type") String type);
+
+    @POST("./items/remove")
+    Completable removeItem(@Query("id") String id, @Query("auth-token") String token);
+
+    @GET("./balance")
+    Single<BalanceResponse> getBalance(@Query("auth-token") String token);
 }

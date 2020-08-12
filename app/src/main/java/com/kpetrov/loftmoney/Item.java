@@ -5,16 +5,18 @@ public class Item {
     private String price;
     private Integer color;
     private String date;
+    private String id;
 
-    public Item(String name, String price, Integer color, String date) {
+    public Item(String name, String price, Integer color, String date, String id) {
         this.name = name;
         this.price = price;
         this.color = color;
         this.date = date;
+        this.id = id;
     }
 
     public static Item getInstance(MoneyItem moneyItem) {
-        return new Item(moneyItem.getName(),moneyItem.getPrice() + " ₽", moneyItem.getType().equals("expense") ? R.color.colorItemPrice : R.color.colorItemIncome, moneyItem.getDate());
+        return new Item(moneyItem.getName(),moneyItem.getPrice() + " ₽", moneyItem.getType().equals("expense") ? R.color.colorItemPrice : R.color.colorItemIncome, moneyItem.getDate(),moneyItem.getId());
     }
 
     public String getName() {
@@ -41,4 +43,7 @@ public class Item {
         return date;
     }
 
+    public String getId() {
+        return id;
+    }
 }
