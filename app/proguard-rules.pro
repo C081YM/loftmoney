@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.kpetrov.loftmoney.AuthApi {*;}
+-keep class com.kpetrov.loftmoney.AuthResponse {*;}
+-keep class com.kpetrov.loftmoney.BalanceResponse {*;}
+-keep class com.kpetrov.loftmoney.MoneyApi {*;}
+-keep class com.kpetrov.loftmoney.MoneyItem {*;}

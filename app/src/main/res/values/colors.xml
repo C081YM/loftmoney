@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <color name="colorPrimary">#3574fa</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#ffc107</color>
     <color name="addItemActivity_editText_color">#3574FA</color>
     <color name="addItemActivity_editText_colorHint">#dbdbdb</color>
     <color name="colorEnable">#7ED321</color>

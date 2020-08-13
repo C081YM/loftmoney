@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActionModeStarted(mode);
         mTabLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.actionModeBackground));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.actionModeBackground));
-        floatingActionButton.hide();                                                                     // скрыть floatingActionButton
+        floatingActionButton.hide();           // скрыть floatingActionButton
     }
 
     @Override
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActionModeFinished(mode);
         mTabLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
-        floatingActionButton.show();                                                                     // вернуть floatingActionButton
+        floatingActionButton.show();           // вернуть floatingActionButton
     }
 
     static class BudgetPagerAdapter extends FragmentPagerAdapter {

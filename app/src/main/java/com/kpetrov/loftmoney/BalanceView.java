@@ -1,12 +1,12 @@
 package com.kpetrov.loftmoney;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public class BalanceView extends View {
 
@@ -16,25 +16,27 @@ public class BalanceView extends View {
     private Paint expensePaint = new Paint();
     private Paint incomePaint = new Paint();
 
+    private int colorExpense;
+    private int colorIncome;
 
     public BalanceView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public BalanceView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public BalanceView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
     public BalanceView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(attrs);
     }
 
     public void update (float expenses, float incomes) {
@@ -42,13 +44,22 @@ public class BalanceView extends View {
         this.incomes = incomes;
 
         invalidate();                                                         //заставляет view перерисовываться
-
     }
 
-    private void init() {
-        expensePaint.setColor(ContextCompat.getColor(getContext(),R.color.colorItemPrice));
-        incomePaint.setColor(ContextCompat.getColor(getContext(),R.color.colorItemIncome));
+    private void init(@Nullable AttributeSet set) {
 
+        if (set == null)
+            return;
+
+        TypedArray typedArray = getContext().obtainStyledAttributes(set,R.styleable.BalanceView);
+
+        colorExpense = typedArray.getColor(R.styleable.BalanceView_diagramColorExpense,0);
+        colorIncome = typedArray.getColor(R.styleable.BalanceView_diagramColorIncome,0);
+
+        expensePaint.setColor(colorExpense);
+        incomePaint.setColor(colorIncome);
+
+        typedArray.recycle();
     }
 
     @Override
@@ -72,6 +83,5 @@ public class BalanceView extends View {
 
         canvas.drawArc(xMargin + space, yMargin, getWidth() - xMargin + space,
                 getHeight() - yMargin, 360 - incomeAngle / 2, incomeAngle, true, incomePaint);
-
     }
 }
